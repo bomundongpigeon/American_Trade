@@ -64,7 +64,7 @@ class turtle_trade:
                                     self.TQQQ_cur_price_table = get_old_price('NAS', 'TQQQ')
                                     self.TQQQ_cur_price = get_current_price('NAS', 'TQQQ')
                                     self.TQQQ_ATR = ATR_calculate(self.TQQQ_cur_price_table)
-                                    send_message("TQQQ ATR : ", self.TQQQ_ATR)
+                                    send_message("TQQQ ATR : ", str(self.TQQQ_ATR))
                                     time.sleep(0.1)
                                     if self.QQQ_cur_price < self.QQQ_20day_high_price - 2 * self.QQQ_ATR:
                                         self.TQQQ_cur_qty = self.stock_dict['TQQQ']
@@ -87,7 +87,7 @@ class turtle_trade:
                                     self.SQQQ_cur_price_table = get_old_price('NAS', 'SQQQ')
                                     self.SQQQ_cur_price = get_current_price('NAS', 'SQQQ')
                                     self.SQQQ_ATR = ATR_calculate(self.SQQQ_cur_price_table)
-                                    send_message("SQQQ ATR : ", self.SQQQ_ATR)
+                                    send_message("SQQQ ATR : ", str(self.SQQQ_ATR))
                                     if self.QQQ_cur_price > self.QQQ_20day_low_price + 2 * self.QQQ_ATR:
                                         self.SQQQ_cur_qty = self.stock_dict['SQQQ']
                                         self.SQQQ_cur_price_table = get_old_price('NAS', 'SQQQ')
@@ -134,7 +134,7 @@ class turtle_trade:
                                     self.SOXL_cur_price_table = get_old_price('AMS', 'SOXL')
                                     self.SOXL_cur_price = get_current_price('AMS', 'SOXL')
                                     self.SOXL_ATR = ATR_calculate(self.SOXL_cur_price_table)
-                                    send_message("SOXL ATR : ", self.SOXL_ATR)
+                                    send_message("SOXL ATR : ", str(self.SOXL_ATR))
                                     if self.SOXX_cur_price < self.SOXX_20day_high_price - 2 * self.SOXX_ATR:
                                         self.SOXL_sell_price = self.SOXL_cur_price - 2 * self.SOXL_ATR
                                         sell('AMEX','SOXL',self.SOXL_cur_qty,self.SOXL_sell_price)
@@ -148,7 +148,7 @@ class turtle_trade:
                                     self.SOXS_cur_price = get_current_price('AMS', 'SOXS')
                                     self.SOXS_cur_price_table = get_old_price('AMS', 'SOXS')
                                     self.SOXS_ATR = ATR_calculate(self.SOXS_cur_price_table)
-                                    send_message("SOXS ATR : ",self.SOXS_ATR)
+                                    send_message("SOXS ATR : ", str(self.SOXS_ATR))
                                     if self.SOXX_cur_price > self.SOXX_20day_low_price + 2 * self.SOXX_ATR:
                                         self.SOXS_cur_qty = self.stock_dict['SOXS']
                                         self.SOXS_cur_price = get_current_price('AMS', 'SOXS')
