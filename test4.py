@@ -52,7 +52,6 @@ class turtle_trade:
                     for i in stock:
                         print(i)
                         if self.price_ref_check(i) == None:
-                            print("Oh my god")
                             self.QQQ_ATR, self.QQQ_20day_high_price, self.QQQ_20day_low_price, self.SOXX_ATR, self.SOXX_20day_high_price, self.SOXX_20day_low_price = self.market_stock_select()
                             time.sleep(0.1)
                         else:
@@ -65,12 +64,14 @@ class turtle_trade:
                                     self.TQQQ_cur_price_table = get_old_price('NAS', 'TQQQ')
                                     self.TQQQ_cur_price = get_current_price('NAS', 'TQQQ')
                                     self.TQQQ_ATR = ATR_calculate(self.TQQQ_cur_price_table)
+                                    send_message("TQQQ ATR : ", self.TQQQ_ATR)
+                                    time.sleep(0.1)
                                     if self.QQQ_cur_price < self.QQQ_20day_high_price - 2 * self.QQQ_ATR:
                                         self.TQQQ_cur_qty = self.stock_dict['TQQQ']
                                         self.TQQQ_cur_price_table = get_old_price('NAS', 'TQQQ')
                                         self.TQQQ_cur_price = get_current_price('NAS', 'TQQQ')
                                         self.TQQQ_ATR = ATR_calculate(self.TQQQ_cur_price_table)
-                                        print(self.TQQQ_ATR)
+
                                         self.TQQQ_sell_price = self.TQQQ_cur_price - 2 * self.TQQQ_ATR
                                         sell('NASD', 'TQQQ', self.TQQQ_cur_qty, self.TQQQ_sell_price)
                                         self.QQQ_trade_signal = 'sell'
@@ -86,12 +87,12 @@ class turtle_trade:
                                     self.SQQQ_cur_price_table = get_old_price('NAS', 'SQQQ')
                                     self.SQQQ_cur_price = get_current_price('NAS', 'SQQQ')
                                     self.SQQQ_ATR = ATR_calculate(self.SQQQ_cur_price_table)
+                                    send_message("SQQQ ATR : ", self.SQQQ_ATR)
                                     if self.QQQ_cur_price > self.QQQ_20day_low_price + 2 * self.QQQ_ATR:
                                         self.SQQQ_cur_qty = self.stock_dict['SQQQ']
                                         self.SQQQ_cur_price_table = get_old_price('NAS', 'SQQQ')
                                         self.SQQQ_cur_price = get_current_price('NAS', 'SQQQ')
                                         self.SQQQ_ATR = ATR_calculate(self.SQQQ_cur_price_table)
-                                        print(self.SQQQ_ATR)
                                         self.SQQQ_sell_price = self.SQQQ_cur_price - 2 * self.SQQQ_ATR
                                         sell('NASD', 'SQQQ', self.SQQQ_cur_qty, self.SQQQ_sell_price)
                                         self.QQQ_trade_signal = 'sell'
@@ -133,8 +134,7 @@ class turtle_trade:
                                     self.SOXL_cur_price_table = get_old_price('AMS', 'SOXL')
                                     self.SOXL_cur_price = get_current_price('AMS', 'SOXL')
                                     self.SOXL_ATR = ATR_calculate(self.SOXL_cur_price_table)
-                                    print(type(get_stock_price('SOXL')))
-                                    print(type(self.SOXL_ATR))
+                                    send_message("SOXL ATR : ", self.SOXL_ATR)
                                     if self.SOXX_cur_price < self.SOXX_20day_high_price - 2 * self.SOXX_ATR:
                                         self.SOXL_sell_price = self.SOXL_cur_price - 2 * self.SOXL_ATR
                                         sell('AMEX','SOXL',self.SOXL_cur_qty,self.SOXL_sell_price)
@@ -148,12 +148,11 @@ class turtle_trade:
                                     self.SOXS_cur_price = get_current_price('AMS', 'SOXS')
                                     self.SOXS_cur_price_table = get_old_price('AMS', 'SOXS')
                                     self.SOXS_ATR = ATR_calculate(self.SOXS_cur_price_table)
-                                    print("sell_price: ",get_stock_price('SOXS') + 2.8 * self.SOXS_ATR)
+                                    send_message("SOXS ATR : ",self.SOXS_ATR)
                                     if self.SOXX_cur_price > self.SOXX_20day_low_price + 2 * self.SOXX_ATR:
                                         self.SOXS_cur_qty = self.stock_dict['SOXS']
                                         self.SOXS_cur_price = get_current_price('AMS', 'SOXS')
                                         self.SOXS_ATR = ATR_calculate(self.SOXS_cur_price_table)
-                                        print(self.SOXS_ATR)
                                         self.SOXS_sell_price = self.SOXS_cur_price - 2 * self.SOXS_ATR
                                         sell('NASD', 'SOXS', self.SOXS_cur_qty, self.SOXS_sell_price)
                                         self.SOXX_trade_signal = 'sell'
@@ -472,9 +471,9 @@ def get_stock_price(stock_name):
             send_message(f"{stock['ovrs_item_name']}({stock['ovrs_pdno']}): {stock['ovrs_cblc_qty']}주")
             time.sleep(0.1)
             if stock['ovrs_pdno'] == stock_name:
-                print("stock_name : ", stock_name)
+                send_message("stock_name : ", stock_name)
                 stock_buy_price = stock['pchs_avg_pric']
-                print(stock_buy_price)
+                send_message("storck_buy_price : ", stock_buy_price)
                 return float(stock_buy_price)
 
 
