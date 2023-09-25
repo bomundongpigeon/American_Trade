@@ -474,9 +474,9 @@ def get_stock_price(stock_name):
             send_message(f"{stock['ovrs_item_name']}({stock['ovrs_pdno']}): {stock['ovrs_cblc_qty']}주")
             time.sleep(0.1)
             if stock['ovrs_pdno'] == stock_name:
-                send_message("stock_name : ", stock_name)
+                send_message(f"stock_name : {stock_name}")
                 stock_buy_price = stock['pchs_avg_pric']
-                send_message("storck_buy_price : ", stock_buy_price)
+                send_message(f"storck_buy_price : {stock_buy_price}")
                 return float(stock_buy_price)
 
 
